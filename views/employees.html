@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Apollonia Dental Practice | Employees</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container my-3" style="max-width: 600px">
+      <div class="card mt-3">
+        <div class="card-header">Display Employee</div>
+        <div class="card-body">
+          <div class="input-group input-group-sm">
+            <button class="btn btn-sm btn-primary" onclick="getAllData()">Get All</button>
+
+            <input type="text" id="get-id" class="form-control ml-2" placeholder="Id">
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-primary" onclick="getDataById()">Get by Id</button>
+            </div>
+
+            <input type="text" id="get-name" class="form-control ml-2" placeholder="Name">
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-primary" onclick="getDataByName()">Find By Name</button>
+            </div>
+
+            <button class="btn btn-sm btn-warning ml-2" onclick="clearGetOutput()">Clear</button>
+          </div>   
+          
+          <div id="getResult"></div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-header">Add New Employee</div>
+        <div class="card-body">
+          <div class="form-group">
+            <input type="text" class="form-control" id="post-name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="post-surname" placeholder="Surname">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="post-department" placeholder="Department">
+          </div>
+          <button class="btn btn-sm btn-primary" onclick="postData()">Add</button>
+          <button class="btn btn-sm btn-warning" onclick="clearPostOutput()">Clear</button>
+
+          <div id="postResult"></div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-header">Update Fields</div>
+        <div class="card-body">
+          <div class="form-group">
+            <input type="text" class="form-control" id="put-id" placeholder="Id">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="put-name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="post-surname" placeholder="Surname">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="post-department" placeholder="Department">
+          </div>
+          <button class="btn btn-sm btn-primary" onclick="putData()">Update</button>
+          <button class="btn btn-sm btn-warning" onclick="clearPutOutput()">Clear</button>
+
+          <div id="putResult"></div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-header">Remove Employee</div>
+        <div class="card-body">
+          <div class="input-group input-group-sm">
+            <button class="btn btn-sm btn-danger" onclick="deleteAllData()">Delete All</button>
+
+            <input type="text" id="delete-id" class="form-control ml-2" placeholder="Id">
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-danger" onclick="deleteDataById()">Delete by Id</button>
+            </div>
+
+            <button class="btn btn-sm btn-warning ml-2" onclick="clearDeleteOutput()">Clear</button>
+          </div>    
+          
+          <div id="deleteResult"></div>      
+        </div>
+      </div>
+    </div>
+
+    <script src="employees.script.js"></script>
+  </body>
+</html>
