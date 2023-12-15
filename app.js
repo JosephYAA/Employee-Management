@@ -11,12 +11,10 @@ connectDb();
 app.use(express.json());
 app.use(express.static('public'))
 
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// simple route
 app.get('/', (req, res) => {
-    res.redirect('/departments'); //this will redirect page to /users
+    res.redirect('/departments');
   });
 
 app.get('/departments', (req,res) => {
@@ -28,8 +26,6 @@ app.get('/employees', (req,res) => {
 
 require("./routes/department.routes")(app);
 require("./routes/employee.routes")(app);
-
-// set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

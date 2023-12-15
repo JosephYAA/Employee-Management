@@ -1,15 +1,12 @@
 const Employee = require('../models/employee');
 const Department = require('../models/department');
 
-// Create and Save a new Tutorial
 exports.create = (req, res) => {
-  // Validate request
   if (!req.body.name) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
-  // Create a Tutorial
   const department = req.body.department;
   let departmentId;
   Department.findOne({name: department})
@@ -21,7 +18,6 @@ exports.create = (req, res) => {
         department: departmentId
     });
 
-    // Save Tutorial in the database
     employee
         .save(employee)
         .then(data => {
@@ -30,47 +26,44 @@ exports.create = (req, res) => {
         .catch(err => {
         res.status(500).send({
             message:
-            err.message || "Some error occurred while creating the Tutorial."
+            err.message || "Some error occurred while creating the Employee."
         });
         });
     })
 };
 
-// Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
   const name = req.query.name;
   var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
 
-  Employee.find(condition).populate("department", "-_id -__v -tutorials")
+  Employee.find(condition).populate("department", "-_id -__v")
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving Employee"
       });
     });
 };
 
-// Find a single Tutorial with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Employee.findById(id).populate("department", "-_id -__v -tutorials")
+  Employee.findById(id).populate("department", "-_id -__v ")
     .then(data => {
       if (!data)
-        res.status(404).send({ message: "Not found Tutorial with id " + id });
+        res.status(404).send({ message: "Not found Employee with id " + id });
       else res.send(data);
     })
     .catch(err => {
       res
         .status(500)
-        .send({ message: "Error retrieving Tutorial with id=" + id });
+        .send({ message: "Error retrieving Employee with id=" + id });
     });
 };
 
-// Update a Tutorial by the id in the request
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
@@ -80,22 +73,21 @@ exports.update = (req, res) => {
 
   const id = req.params.id;
 
-  Employee.findByIdAndUpdate(id, req.body, { useFindAndModify: false }).populate("department", "-_id -__v -tutorials")
+  Employee.findByIdAndUpdate(id, req.body, { useFindAndModify: false }).populate("department", "-_id -__v")
     .then(data => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`
+          message: `Cannot update Employee with id=${id}. Maybe Employee was not found!`
         });
-      } else res.send({ message: "Tutorial was updated successfully." });
+      } else res.send({ message: "Employee was updated successfully." });
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Tutorial with id=" + id
+        message: "Error updating Employee with id=" + id
       });
     });
 };
 
-// Delete a Tutorial with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
 
@@ -103,33 +95,32 @@ exports.delete = (req, res) => {
     .then(data => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+          message: `Cannot delete Employee with id=${id}. Maybe Employee was not found!`
         });
       } else {
         res.send({
-          message: "Tutorial was deleted successfully!"
+          message: "Employee was deleted successfully!"
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Tutorial with id=" + id
+        message: "Could not delete Employee with id=" + id
       });
     });
 };
 
-// Delete all Tutorials from the database.
 exports.deleteAll = (req, res) => {
   Employee.deleteMany({})
     .then(data => {
       res.send({
-        message: `${data.deletedCount} Tutorials were deleted successfully!`
+        message: `${data.deletedCount} Employees were deleted successfully!`
       });
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all tutorials."
+          err.message || "Some error occurred while removing all Employees."
       });
     });
 };
